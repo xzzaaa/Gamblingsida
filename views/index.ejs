@@ -1,5 +1,28 @@
 <%- include("templates/head.ejs"); %>
 
+<h1>Slot Machine Game</h1>
 
+<link rel="stylesheet" href="/public/assets/style.css">
+
+<div id="slot-machine">
+    <div id="reels">
+        <div class="reel">🍒</div>
+        <div class="reel">7</div>
+        <div class="reel">🍊</div>
+    </div>
+
+    <div>
+        <button id="spin-btn">Spin</button>
+        <label for="add-amount"></label>
+<input type="number" id="add-amount" placeholder="Enter amount">
+<button id="addbalance-btn">Add Balance</button>
+
+    </div>
+
+    <div id="result"></div>
+    <div id="balance">Balance: $100</div>
+</div>
+
+<script src="/public/gamescript.js"></script>
 
 <%- include("templates/footer.ejs"); %>

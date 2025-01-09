@@ -1,3 +1,50 @@
-body {
+/* style.css */
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    text-align: center;
+    padding: 20px;
 }
+
+h1 {
+    color: #333;
+    font-size: 2rem;
+}
+
+#balance {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.reel {
+    font-size: 3rem;
+    margin: 10px;
+    display: inline-block;
+    width: 100px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
