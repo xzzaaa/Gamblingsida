@@ -18,7 +18,8 @@ h1 {
 }
 
 button {
-    background-color: #4CAF50;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 300% 300%; /* Makes the gradient larger for a smoother animation */
     color: white;
     padding: 10px 20px;
     margin: 5px;
@@ -26,11 +27,73 @@ button {
     cursor: pointer;
     font-size: 1rem;
     border-radius: 5px;
+    animation: rainbowMove 3s linear infinite; /* Continuous animation */
+}
+
+@keyframes rainbowMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 button:hover {
-    background-color: #45a049;
+    background: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
+    background-size: 300% 300%;
+    animation: rainbowHover 0.5s linear forwards;
 }
+
+@keyframes rainbowHover {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 300% 300%;
+    animation: rainbowNav 3s linear infinite;
+}
+
+@keyframes rainbowNav {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+nav a:hover {
+    background: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
+    background-size: 300% 300%;
+    animation: rainbowNavHover 0.5s linear forwards;
+}
+
+@keyframes rainbowNavHover {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#slot-machine {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.reel {
+    font-size: 2rem;
+    margin: 0 10px;
+    border: 2px solid #ccc;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 5px;
+}
+
+
 
 #result {
     margin-top: 20px;

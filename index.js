@@ -4,8 +4,13 @@ const port = 3000;
 const mysql = require("mysql2/promise")
 const dotenv = require("dotenv").config()
 const dataBasConn = require("./databaseUsers");
+const sessions = require('express-session');
 const bcrypt = require("bcrypt");
 
+
+const userRouter = require("./routes/userRouter");
+const gamesRouter = require("./routes/gamesRouter");
+const { render } = require('ejs');
 
 const conn = mysql.createPool({
     host: process.env.DV_HOST,
@@ -15,13 +20,36 @@ const conn = mysql.createPool({
     port: process.env.DB_PORT
 });
 
-app.use(express.urlencoded({extended:false}));
-
-
 
 app.set('view engine', 'ejs');
-
 app.use('/public', express.static('public'))
+app.use(express.urlencoded({extended:false}));
+
+app.use(sessions({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized:true,
+    cookie: {
+        maxAge: 1000*60*60*24
+    },
+    resave:false
+}));
+
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = !!req.session.user ? true : false;
+    // !! = bool
+    // ? : shorthand for if statement
+
+    if (req.session.user) {
+        next();
+    }else if(req.originalUrl == "/"
+        || req.originalUrl == "/signup"
+        || render.originalUrl == "/login") {
+            next();
+        }else {
+            res.render('login')
+        }
+    });
+    
 
 
 app.get('/', async function(req,res) {
@@ -34,59 +62,8 @@ app.get('/', async function(req,res) {
     res.render('index');
 });
 
-app.get('/login', function(req,res) {
-    res.render('login');
-});
-
-app.get('/signup', function(req,res) {
-    res.render('register');
-});
-
-app.post("/login", async function (req, res) {
-    console.log(req.body)
-    let email = req.body.email
-    let user = await dataBasConn.getUser(email)
-
-    let test = await bcrypt.compare(req.body.password, user.password)
-    console.log(test)
-    if(test == true){
-        res.render("inder")
-    } else {
-        res.redirect('/')
-    }
-})
-
-
-app.post('/signup', async function(req, res) {
-
-    const validprnr = checkPersnr(req.body.personnr)
-    if(validprnr == true){
-        let result = await dataBasConn.addUser(req.body.email, req.body.password, req.body.personnr, req.body.name, req.body.telefon, req.body.address);
-        if (result.affected_rows == 1){
-        res.render("login")}
-        else {
-            res.render("register")
-        }
-    }
-
-});
-
-function checkPersnr(personnr){
-    let nrs = personnr.split('');
-    let check = 0;
-    for(let i = 0; i < 9;i++){
-        let add = nrs[i] * (((i+1) % 2) + 1)
-        check += add % 10        
-        if (add > 9){
-            check += 1    
-        }
-    }
-    if((10 - (check % 10)) % 10 == personnr[9]){
-        return true;
-    } else {
-        return false;
-    }
-}
+app.use('/', userRouter);
+app.use('/', gamesRouter);
 
 
 app.listen(port, function(){
