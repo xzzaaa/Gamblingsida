@@ -1,0 +1,15 @@
+<%- include("templates/head.ejs"); %>
+
+<h1>Ready to start your road to riches?</h1>
+
+<form method="POST" action="/addGames">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name">
+    <label for="stats">Stats</label>
+    <input type="text" name="stats" id="stats">
+    <label for="chance">Chance</label>
+    <input type="text" name="chance" id="chance">
+    <input type="submit">	
+</form>
+
+<%- include("templates/footer.ejs"); %>

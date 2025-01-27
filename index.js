@@ -38,32 +38,34 @@ app.use((req, res, next) => {
     res.locals.isLoggedIn = !!req.session.user ? true : false;
     // !! = bool
     // ? : shorthand for if statement
-
+    console.log(res.locals.isLoggedIn);
     if (req.session.user) {
         next();
-    }else if(req.originalUrl == "/"
-        || req.originalUrl == "/signup"
-        || render.originalUrl == "/login") {
+    }else if(req.originalUrl == "/" || req.originalUrl == "/signup" || req.originalUrl == "/login") {
             next();
-        }else {
-            res.render('login')
-        }
-    });
+    }else {
+        res.render('login')
+    }
+});
     
 
 
 app.get('/', async function(req,res) {
-
     const test = await conn.query(`
         SELECT * FROM users`,)
-
-        console.log(test);
+    //console.log(test);
 
     res.render('index');
 });
 
+
 app.use('/', userRouter);
 app.use('/', gamesRouter);
+
+
+app.use(function(req, res, next) {
+    res.status(404).render('404')
+});
 
 
 app.listen(port, function(){

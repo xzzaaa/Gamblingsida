@@ -1,0 +1,14 @@
+<%- include("templates/head.ejs"); %>
+
+<h1>Hello <%= user.name %></h1>
+<p>You have <%= user.cash %> money</p>
+<% if(user.msg) { %> 
+    <p class="msg"><%= user.msg %></p>
+<% } %>
+<form method="POST" action="settings">
+    <label for ="funds">Add funds</label>
+    <input type="text" name="funds" id="funds">
+    <input type="submit">
+</form>
+
+<%- include("templates/footer.ejs"); %>

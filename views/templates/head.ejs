@@ -10,7 +10,13 @@
 <header>
     <nav>
         <a href="/">Start</a>
+        <% if(isLoggedIn) { %>
+        <a href="/games">Games</a>
+        <a href="/logout">Logout</a>
+        <a href="/settings">Settings</a>
+        <% } else { %>
         <a href="/login">Login</a>
         <a href="/signup">Register</a>
-    </nav>
+        <% } %>
+        </nav>
 </header>

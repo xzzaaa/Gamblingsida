@@ -2,7 +2,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    
     text-align: center;
     padding: 20px;
 }
@@ -63,6 +63,7 @@ nav a {
     100% { background-position: 100% 50%; }
 }
 
+
 nav a:hover {
     background: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
     background-size: 300% 300%;
@@ -102,12 +103,33 @@ nav a:hover {
 }
 
 .reel {
+    margin-top: 20px;
     font-size: 3rem;
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     display: inline-block;
     width: 100px;
     padding: 15px 20px;
     border-radius: 8px;
     border: 1px solid black;
+    overflow: hidden;
+    
 }
 
+@keyframes spin {
+    0% {
+        position: relative;
+        top: 0px;
+    }
+    100% {
+        position: relative;
+        top: -430px;
+    }
+}
+
+.extraSlide {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+}
